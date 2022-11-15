@@ -24,11 +24,11 @@ public class LoginCheckFilter implements Filter {
         String requestURI = httpRequest.getRequestURI();
 
         try {
-            log.info("{ } 에 인증여부 확인 시작", requestURI);
+            log.info("{} 에 인증여부 확인 시작", requestURI);
             if (isLoginCheckPath(requestURI)) {
                 if (session == null || (MemberSession)session.getAttribute(SessionConst.MEMBER_SESSION) == null){
-                    log.info("{ } 에 미인증 요청 들어옴", requestURI);
-                    httpResponse.sendRedirect("/login");    // 로그인 화면으로 보내기 위함  => 수정 필요
+                    log.info("{} 에 미인증 요청 들어옴", requestURI);
+                    httpResponse.sendRedirect("/login?redirectUrl="+requestURI);    // 로그인 화면으로 보내기 위함  => 로그인 후 처음 접속했던 화면으로 redirect 필요
                     return; // 미인증 요청자는 다음(chain 필터, servlet)으로 진행하지 않고 종료
                 }
 
@@ -46,7 +46,7 @@ public class LoginCheckFilter implements Filter {
     }
 
     /**
-     * 화이트리스트의 경우 인증체크 하지 않기 위해 체크하는 메소드
+     * 화이트리스트의 경우 인증 체크하지 않기 위한 메소드
      * @param requestUri
      * @return
      */
