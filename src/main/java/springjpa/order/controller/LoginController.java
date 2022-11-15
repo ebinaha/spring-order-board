@@ -76,9 +76,18 @@ public class LoginController {
         return "redirect:/";
     }
 
+    // 쿠키를 사용한 로그아웃 처리
+//    @GetMapping("/logout")
+//    public String logout(HttpServletResponse response) {
+//        expireCookie(response, "memberId");
+//        return "redirect:/";
+//    }
+
+    // 세션을 사용한 로그아웃 처리
     @GetMapping("/logout")
-    public String logout(HttpServletResponse response) {
-        expireCookie(response, "memberId");
+    public String sessionLogout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        request.getSession(false);
         return "redirect:/";
     }
     private void expireCookie(HttpServletResponse response, String cookieName) {
