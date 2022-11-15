@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
-@Slf4j
+@Slf4j  // log로 남게 함
 @RestController
 public class SessionController {
 

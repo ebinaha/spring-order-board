@@ -8,6 +8,8 @@ import springjpa.order.domain.item.Book;
 import springjpa.order.domain.item.Item;
 import springjpa.order.service.ItemService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -17,12 +19,18 @@ public class ItemController {
 
     @GetMapping("/items/new")
     public String createForm(Model model){
+//        HttpSession session = request.getSession(false);
+//        if ()
         model.addAttribute("form", new BookForm());
         return "items/createItemForm";
     }
 
     @PostMapping("/items/new")
-    public String createForm(BookForm form){
+    public String createForm(HttpServletRequest request, BookForm form){
+
+//        HttpSession session = request.getSession(false);
+//        if ()
+
         Book book = new Book();
         // setter 를 열어놓고 저장하는 방식보다 order 처럼 createBook 메소드로 저장하는 방식을
         // 사용하는 방식이 더 현업에서 많이 사용되니 나중에 수정할 것
@@ -38,6 +46,8 @@ public class ItemController {
 
     @GetMapping("/items")
     public String list(Model model){
+//        HttpSession session = request.getSession(false);
+//        if ()
         List<Item> items = itemService.findItem();
         model.addAttribute("items", items);
         return "items/itemList";
@@ -45,6 +55,9 @@ public class ItemController {
 
     @GetMapping("/items/edit/{itemId}")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model){
+//        HttpSession session = request.getSession(false);
+//        if ()
+
         Book item = (Book) itemService.findOne(itemId);
         BookForm form = new BookForm();
         //model mapper 라이브러리 사용해서 get,set자동으로 하는 방법도 있음.

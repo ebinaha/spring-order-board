@@ -86,8 +86,10 @@ public class LoginController {
     // 세션을 사용한 로그아웃 처리
     @GetMapping("/logout")
     public String sessionLogout(HttpServletRequest request) {
-        request.getSession().invalidate();
-        request.getSession(false);
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
         return "redirect:/";
     }
     private void expireCookie(HttpServletResponse response, String cookieName) {
