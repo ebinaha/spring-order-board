@@ -94,6 +94,7 @@ public class LoginController {
         MemberSession memberSession = new MemberSession();
         memberSession.setLoginId(loginMember.getLoginId());
         memberSession.setUsername(loginMember.getUsername());
+        memberSession.setId(loginMember.getId());
 
         // 세션이 있으면 있는 세션을 반환, 없으면 생성해서 반환
         HttpSession session = request.getSession(true);

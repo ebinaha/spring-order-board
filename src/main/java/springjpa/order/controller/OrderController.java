@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import springjpa.order.controller.session.MemberSession;
+import springjpa.order.controller.session.SessionConst;
 import springjpa.order.domain.Member;
 import springjpa.order.domain.Order;
 import springjpa.order.domain.item.Item;
@@ -15,6 +17,8 @@ import springjpa.order.service.ItemService;
 import springjpa.order.service.MemberService;
 import springjpa.order.service.OrderService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -25,11 +29,15 @@ public class OrderController {
     private final ItemService itemService;
 
     @GetMapping("/order")
-    public String createForm(Model model) {
-        List<Member> members = memberService.findMembers();
+    public String createForm(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession();
+        MemberSession memberSession = (MemberSession)session.getAttribute(SessionConst.MEMBER_SESSION);
+
+//        List<Member> members = memberService.findMembers();
         List<Item> items = itemService.findItem();
 
-        model.addAttribute("members",members);
+        model.addAttribute("members", memberSession);
         model.addAttribute("items",items);
         return "order/orderForm";
     }
