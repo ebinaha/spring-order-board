@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @Slf4j // log에 찍어주는
 public class LogUriFilter implements Filter {
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         log.info("filter init");
