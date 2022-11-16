@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springjpa.order.filter.LogUriFilter;
 import springjpa.order.filter.LoginCheckFilter;
 import springjpa.order.interceptor.LogUriInterceptor;
+import springjpa.order.interceptor.LoginCheckInterceptor;
 
 import javax.servlet.Filter;
 
@@ -25,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
         return filterRegistrationBean;
     }
 
-    @Bean
+    //@Bean
     public FilterRegistrationBean LoginCheckFilter(){
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
         // 두번째 필터로 LoginCheckFilter 등록
@@ -43,6 +44,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns("/**")
                 .excludePathPatterns("/css/**","/");
-    }
 
+        registry.addInterceptor(new LoginCheckInterceptor())
+                .order(2)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/", "/members/new", "/login", "/css/**", "/logout"); // whitelist 내용
+    }
 }

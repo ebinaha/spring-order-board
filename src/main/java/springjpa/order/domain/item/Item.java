@@ -2,6 +2,7 @@ package springjpa.order.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import springjpa.order.exception.NotEnoughStockException;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @DiscriminatorColumn(name="dtype") // 책,앨범,영화에 대한 구분자
 @Getter
 @Setter
+@ToString
 public abstract class Item { // 추상클래스로 만든다. 구현체를 가지고 주문과 연결
 
     @Id
