@@ -21,6 +21,7 @@ public abstract class Item { // 추상클래스로 만든다. 구현체를 가�
     @Column(name="item_id")
     public Long id;
 
+    @Column(length = 60)
     private String name;
     private int price;
     private int stockQuantity;

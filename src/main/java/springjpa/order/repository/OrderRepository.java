@@ -24,6 +24,7 @@ public class OrderRepository {
         em.persist(order);
     }
 
+    //order를 id로 찾은값 = list => 한개값만 optional로 가져와서 반환
     public Order findOne(Long id) {
         return Optional.ofNullable(em.find(Order.class, id)).get();
     }

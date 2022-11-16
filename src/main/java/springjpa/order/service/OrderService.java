@@ -28,7 +28,7 @@ public class OrderService {
     /**
      * 주문 생성 및 재고 반영
      */
-    @Transactional
+    @Transactional  // readonly = false
     public Long order(Long memberId, Long itemId, int count){
         // 엔티티 조회
         Member member = memberRepository.findById(memberId);

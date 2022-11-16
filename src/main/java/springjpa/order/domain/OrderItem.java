@@ -22,9 +22,10 @@ public class OrderItem {
     @JoinColumn(name="item_id")
     private Item item;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="order_id")
+    @ManyToOne(fetch = LAZY)    //fetch = Lazy 조인해서 PK 가져올 때 필요한 값만 하나씩 참조
+    @JoinColumn(name="order_id")    // FK, 관계의 주인
     private Order order;
+
     private int orderPrice; // 주문가격
     private int count; // 주문수량
 
@@ -42,7 +43,7 @@ public class OrderItem {
         orderItem.setOrderPrice(orderPrice);
         orderItem.setCount(count);
 
-        item.removeStock(count);
+        item.removeStock(count);    // - 재고
         return orderItem;
     }
 

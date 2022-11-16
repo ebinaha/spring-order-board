@@ -8,5 +8,8 @@ import javax.persistence.Embeddable;
 public enum OrderStatus {
     // 주문의 상태 : [ORDER,CANCEL]    ===> 방법 알아보기
     ORDER,
-    CANCEL
+
+    // 발생할 수 있는 모든 키를 넣음 : enum
+    CANCEL,
+
 }
